@@ -19,15 +19,16 @@ def ImageGenerator(url, pCode):
     driver.get(url)
 
     #this is dependant on the story
-    numberOfParagraphs = 5
+    numberOfParagraphs = 3
 
     body_element = driver.find_element(By.XPATH, "//body")
     body_element.send_keys(Keys.CONTROL + Keys.SHIFT + 'i')
 
-
+    #also dependant on the story
+    read_more_button = driver.find_element(By.XPATH, '//*[@id="t3_1f0rugc-read-more-button"]')
+    read_more_button.click()
     print("here")
-    sleep(15)
-
+    sleep(10)
 
     #get title and length and time
     title = driver.find_element(By.XPATH, '//*[@id="post-title-t3_' + pCode + '"]')
@@ -50,8 +51,8 @@ def ImageGenerator(url, pCode):
 
 
     #save the lengths BUT NOT TIMES YET
-    #with open('./images/lengths.csv', 'w') as csvfile:
-        #write = csv.writer(csvfile)
+    with open('./images/lengths.csv', 'w') as csvfile:
+        write = csv.writer(csvfile)
         
         #write.writerow(lengths)
-        #write.writerow(times)
+        write.writerow(times)

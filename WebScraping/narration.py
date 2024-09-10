@@ -27,24 +27,34 @@ def narationGenerator(flag):
 
     driver.maximize_window()
 
+    print("1")
+
+    
 
     with open('./json/cookies.json', 'r') as file:
         cookies = json.load(file)
 
+    print("2")
 
     #go to webpage
     driver.get("https://gesserit.co/#speech")
+
+    print("here2")
+    ###
 
     for cookie in cookies:
         driver.add_cookie(cookie)
 
     driver.refresh()
 
+    print("3")
 
     #wait for the correct area and access it
     element = WebDriverWait(driver, 1000).until(
         EC.element_to_be_clickable((By.XPATH, '//*[@id="speech"]/textarea'))
     )
+
+    print("4")
 
     #send the text i want narrated
     element.send_keys(text)
@@ -54,10 +64,13 @@ def narationGenerator(flag):
 
     sleep(2)
 
-    voice_button = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.XPATH, '//*[@id="headlessui-listbox-button-:R1idcipb6:"]'))
-    )
+    print("5")
 
+    voice_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, '/html/body/div[1]/div/div[2]/div[2]/div[4]/div/div/div/div/form/div/div[2]'))
+    )
+    
+    print("6")
 
     voice_button.click()
 
@@ -95,7 +108,7 @@ def narationGenerator(flag):
     #sleep(20)
     #cookies = driver.get_cookies()
     #with open('cookies.json', 'w') as file:
-        #json.dump(cookies, file) 
+    #    json.dump(cookies, file) 
     #print("here2")
     ###
 

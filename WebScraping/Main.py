@@ -1,9 +1,9 @@
 from jsonparser import *
 from narration import *
 from storyImages import *
-from videoBackground import *
 from speedup import *
-
+from videoBackground import *
+from cleanup import *
 
 def main(url, pcode):
     jsonScraper(url)
@@ -11,8 +11,9 @@ def main(url, pcode):
     combine()
     ImageGenerator(url, pcode)
     vidGenerator()
+    cleanAll()
 
-main("https://www.reddit.com/r/AmItheAsshole/comments/1by3w5s/aita_for_wearing_fake_freckles/", "1by3w5s" )
+main("https://www.reddit.com/r/AmItheAsshole/comments/1f0rugc/aita_for_not_telling_my_gf_about_my_scars/", "1f0rugc" )
 
 
 

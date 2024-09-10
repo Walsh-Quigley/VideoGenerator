@@ -1,9 +1,11 @@
 import html
 import json
+import os
 import urllib.request
 
 
 def jsonScraper(url):
+    
     
     #opens the page I need in its json format and retrieves the data to be parsed
     page = urllib.request.urlopen( url + ".json")
@@ -20,7 +22,7 @@ def jsonScraper(url):
     with open("./json/rawPost.json", 'r') as f:
         data = json.load(f)
 
-    #sames the title and body text
+    #saves the title and body text
     title = data[0]['data']['children'][0]['data']['title']
     selftext = data[0]['data']['children'][0]['data']['selftext']
 
@@ -31,5 +33,19 @@ def jsonScraper(url):
 
     #saves the title text
     with open('./text/title_itself.txt', "w") as outfile:
-        outfile.write("Am i the asshole" + title[4:])
+        outfile.write(title)
+
+    filter_lines('./text/story_itself.txt')
+
+def filter_lines(filename):
+    with open(filename, 'r') as file:
+        lines = file.readlines()
+
+    with open(filename, 'w') as file:
+        for line in lines:
+            # Split the line into words and check the first 3
+            words = line.strip().lower().split()
+            if not any("edit" in words[i] for i in range(min(3, len(words)))):
+                file.write(line)
+
 
