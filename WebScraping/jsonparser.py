@@ -6,19 +6,14 @@ import urllib.request
 
 def jsonScraper(url):
     
-    
     #opens the page I need in its json format and retrieves the data to be parsed
     page = urllib.request.urlopen( url + ".json")
     pjson = page.read()
     pjdata = json.loads(pjson)
-    #print(pjdata)
-
 
     #writes the data to a file and the file to read from
     with open("./json/rawPost.json", "w") as outfile:
         json.dump(pjdata, outfile)
-
-
     with open("./json/rawPost.json", 'r') as f:
         data = json.load(f)
 
@@ -35,12 +30,15 @@ def jsonScraper(url):
     with open('./text/title_itself.txt', "w") as outfile:
         outfile.write(title)
 
+    #filter out any text that is not part of the main body text
     filter_lines('./text/story_itself.txt')
 
 def filter_lines(filename):
+    #open text file we need
     with open(filename, 'r') as file:
         lines = file.readlines()
 
+    #Remove any text that includes the word "edit"
     with open(filename, 'w') as file:
         for line in lines:
             # Split the line into words and check the first 3
